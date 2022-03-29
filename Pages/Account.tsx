@@ -1,15 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import IconButton from '../Components/Firebase/IconButton';
-import { signOut } from 'firebase/auth';
+import { StyleSheet, Text, View, Pressable, Button } from 'react-native';
+import { Auth, getAuth, signOut } from 'firebase/auth';
+import { AuthContext } from '../Firebase/AuthContext';
+
+const auth = getAuth();
 
 export default function HomeScreen() {
-  const user = {
-    email: 'test',
-    uid: 'testid',
-  };
-  return <View style={styles.container}></View>;
+  const { user } = useContext(AuthContext);
+  console.log(user.displayName);
+  async function handleSignOut(auth: Auth) {
+    try {
+      await signOut(auth).then((response) => {
+        console.log(response);
+        return response;
+      });
+    } catch (error: any) {
+      console.log(error!.message);
+      return error;
+    }
+  }
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Hello {user.displayName}</Text>
+      <Pressable
+        aria-label="Sign out"
+        onPress={() => handleSignOut(auth)}
+        // title="Sign out"
+        style={styles.button}
+      >
+        <Text style={styles.text}>Sign out</Text>
+      </Pressable>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -18,6 +40,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e93b81',
     paddingTop: 50,
     paddingHorizontal: 12,
+    alignItems: 'center',
   },
   row: {
     flexDirection: 'row',
@@ -34,5 +57,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'normal',
     color: '#fff',
+  },
+  button: {
+    height: '7%',
+    width: '40%',
+    borderRadius: 5,
+    alignItems: 'center',
+    textAlignVertical: 'center',
+    backgroundColor: 'hsl(197, 100%, 47%)',
+    justifyContent: 'center',
+    color: 'white',
   },
 });

@@ -9,21 +9,20 @@ import News from './Pages/News';
 import Map from './Pages/Map';
 import Account from './Pages/Account';
 import React, { useContext } from 'react';
-import { AuthProvider, AuthContext } from './Firebase/AuthContext';
+import { AuthContext } from './Firebase/AuthContext';
 import LoadingSpinner from './Components/LoadingSpinner/LoadingSpinner';
 
 const Stack = createNativeStackNavigator();
 
 export default function Index() {
   const { user, isLoading } = useContext(AuthContext);
-  console.log(isLoading);
   return (
     <NavigationContainer>
       {isLoading ? (
         <LoadingSpinner></LoadingSpinner>
       ) : (
         <Stack.Navigator
-          initialRouteName={user === null ? 'Home' : 'Account'}
+          initialRouteName={user ? 'Account' : 'Home'}
           screenOptions={{
             headerTitleAlign: 'center',
             headerLeft: (props) => null,
@@ -49,7 +48,7 @@ export default function Index() {
 
           <Stack.Screen
             name="Account"
-            component={Account}
+            component={user ? Account : Home}
             options={{ title: 'Account' }}
           ></Stack.Screen>
         </Stack.Navigator>

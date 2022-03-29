@@ -12,15 +12,15 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  console.log(user);
+
   useEffect(() => {
     // onAuthStateChanged returns an unsubscriber
     const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       try {
         user ? setUser(user) : setUser(null);
         setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     });
     return unsubscribeAuth;
   }, []);
