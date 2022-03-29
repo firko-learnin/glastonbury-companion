@@ -6,7 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '5%',
+    height: '7%',
     backgroundColor: 'hsl(0, 0%, 95%)',
     flex: 1,
     flexDirection: 'row',

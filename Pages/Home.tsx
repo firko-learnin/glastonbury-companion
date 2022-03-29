@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
+import GoogleAuth from '../Firebase/GoogleAuth';
 
 export default function Home() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Home</Text>
+      <GoogleAuth></GoogleAuth>
     </View>
   );
 }
