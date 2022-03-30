@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     zIndex: 2,
-    width: '250px',
-    height: '250px',
+    width: 250,
+    height: 250,
   },
 });

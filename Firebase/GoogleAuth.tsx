@@ -1,26 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import { getAuth, signInWithPopup } from 'firebase/auth';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
+import { AuthContext } from './AuthContext';
+import * as Google from 'expo-auth-session/providers/google';
+import * as WebBrowser from 'expo-web-browser';
+import Constants from 'expo-constants';
+
+WebBrowser.maybeCompleteAuthSession();
 
 function GoogleAuth() {
-  const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: 'select_account' });
+  const { auth } = useContext(AuthContext);
 
   //Google sign in function
-  async function handleGoogleSignIn() {
-    const authentication = getAuth();
-    try {
-      await signInWithPopup(authentication, provider).then((response) => {
-        console.log(response);
-      });
-    } catch (error: any) {
-      console.log(error!.message);
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId: Constants!.manifest!.extra!.googleClientId,
+  });
+
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { id_token } = response.params;
+
+      const provider = new GoogleAuthProvider();
+      const credential = GoogleAuthProvider.credential(id_token);
+      signInWithCredential(auth, credential);
     }
-  }
+  }, [response]);
 
   return (
-    <Pressable aria-label="Sign in with Google" onPress={handleGoogleSignIn} style={styles.button}>
+    <Pressable
+      aria-label="Sign in with Google"
+      onPress={() => {
+        promptAsync();
+      }}
+      style={styles.button}
+    >
       <Text style={styles.text}>Sign in</Text>
     </Pressable>
   );

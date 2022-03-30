@@ -17,14 +17,19 @@ export default {
     },
     assetBundlePatterns: ['**/*'],
     ios: {
+      bundleIdentifier: 'com.firko.glasto-app',
       supportsTablet: true,
+      // googleServicesFile: './GoogleService-Info.plist',
     },
     android: {
+      package: 'com.firko.glastoapp',
+      // googleServicesFile: './google-services.json',
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#FFFFFF',
       },
     },
+    plugins: ['@react-native-google-signin/google-signin'],
     web: {
       favicon: './assets/favicon.png',
     },
@@ -36,6 +41,7 @@ export default {
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
       appId: process.env.APP_ID,
       measurementId: process.env.MEASUREMENT_ID,
+      googleClientId: process.env.GOOGLE_CLIENT_ID,
     },
   },
 };

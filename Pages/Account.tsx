@@ -7,11 +7,9 @@ const auth = getAuth();
 
 export default function HomeScreen() {
   const { user } = useContext(AuthContext);
-  console.log(user.displayName);
   async function handleSignOut(auth: Auth) {
     try {
       await signOut(auth).then((response) => {
-        console.log(response);
         return response;
       });
     } catch (error: any) {
