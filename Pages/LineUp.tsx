@@ -1,5 +1,6 @@
 import { StyleSheet, Text, SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import schedule from '../Data/schedule2019.json';
+import Timetable from '../Components/Timetable/Timetable';
 
 function extractPyramid() {
   const index = schedule.locations.findIndex((location) => location.name === 'Pyramid Stage');
@@ -21,6 +22,7 @@ export default function LineUp() {
           </Text>
         ))}
       </ScrollView> */}
+      <Timetable></Timetable>
     </SafeAreaView>
   );
 }
