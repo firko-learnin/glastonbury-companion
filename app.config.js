@@ -42,6 +42,9 @@ export default {
       appId: process.env.APP_ID,
       measurementId: process.env.MEASUREMENT_ID,
       googleClientId: process.env.GOOGLE_CLIENT_ID,
+      twitterApiKey: process.env.TWITTER_API_KEY,
+      twitterApiSecret: process.env.TWITTER_API_SECRET,
+      twitterBearerToken: process.env.TWITTER_BEARER_TOKEN,
     },
   },
 };

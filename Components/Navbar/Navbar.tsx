@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, Text, Pressable, SafeAreaView, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -9,7 +9,7 @@ const Tab = createBottomTabNavigator();
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '7%',
+    height: Platform.OS === 'ios' ? '10%' : '7%',
     backgroundColor: 'hsl(0, 0%, 95%)',
     flex: 1,
     flexDirection: 'row',
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 export default function Navbar() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Pressable style={styles.nav1} onPress={() => navigation.navigate('Line-up')}>
         <Text style={styles.text}>Line-up</Text>
       </Pressable>
@@ -78,6 +78,6 @@ export default function Navbar() {
       <Pressable style={styles.nav4} onPress={() => navigation.navigate('Account')}>
         <Text style={styles.text}>Account</Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 }

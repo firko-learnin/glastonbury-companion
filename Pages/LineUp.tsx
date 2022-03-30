@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import schedule from '../Data/schedule2019.json';
-import Navbar from '../Components/Navbar/Navbar';
 
 function extractPyramid() {
   const index = schedule.locations.findIndex((location) => location.name === 'Pyramid Stage');
@@ -10,37 +9,34 @@ function extractPyramid() {
 
 export default function LineUp() {
   const data = extractPyramid();
-  console.log(data[0].name);
+  console.log(data);
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Line-up:</Text>
-      {data.map((item, index) => (
-        <Text key={index} style={styles.text}>
-          {'\u2B24' + ' '}
-          {item.name} - {item.start}
-        </Text>
-      ))}
-      {data.map((item, index) => (
-        <Text key={index} style={styles.text}>
-          {'\u2B24' + ' '}
-          {item.name} - {item.start}
-        </Text>
-      ))}
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Pyramid Stage</Text>
+      {/* <ScrollView contentContainerStyle={styles.scrollView}>
+        {data.map((item, index) => (
+          <Text key={index} style={styles.text}>
+            {'\u2B24' + ' '}
+            {item.name} - {item.start}
+          </Text>
+        ))}
+      </ScrollView> */}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: '10%',
-    marginBottom: '7%',
-    paddingBottom: '7%',
     backgroundColor: 'hsl(247, 56%, 18%)',
+    paddingTop: StatusBar.currentHeight,
+  },
+  scrollView: {
     alignItems: 'center',
-    overflow: 'scroll',
+    paddingBottom: '10%',
   },
   title: {
+    textAlign: 'center',
     color: 'white',
     fontSize: 40,
   },
