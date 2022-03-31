@@ -4,13 +4,12 @@ import Timetable from '../Components/Timetable/Timetable';
 
 function extractPyramid() {
   const index = schedule.locations.findIndex((location) => location.name === 'Pyramid Stage');
-  const data = schedule.locations[index].events;
-  return data;
+  const actData = schedule.locations[index].events;
+  return actData;
 }
 
 export default function LineUp() {
-  const data = extractPyramid();
-  console.log(data);
+  const actData = extractPyramid();
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Pyramid Stage</Text>
@@ -22,7 +21,7 @@ export default function LineUp() {
           </Text>
         ))}
       </ScrollView> */}
-      <Timetable></Timetable>
+      <Timetable actData={actData}></Timetable>
     </SafeAreaView>
   );
 }

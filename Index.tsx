@@ -22,7 +22,8 @@ export default function Index() {
         <LoadingSpinner></LoadingSpinner>
       ) : (
         <Stack.Navigator
-          initialRouteName={user ? 'Account' : 'Home'}
+          // initialRouteName={user ? 'Account' : 'Home'} // Commented out whilst testing line-up timetable
+          initialRouteName={user ? 'Lineup' : 'Lineup'}
           screenOptions={{
             headerTitleAlign: 'center',
             headerLeft: (props) => null,
