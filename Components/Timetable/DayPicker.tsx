@@ -55,12 +55,13 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     textAlign: 'center',
+    fontSize: 15,
   },
   dayPicker: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: '#eb7db1',
+    backgroundColor: 'rgb(233, 59, 129)',
     height: 40,
   },
   Pressable: {

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, ScrollView } from 'react-native';
 import DayPicker from './DayPicker';
+import Stages from './Stages';
+import Times from './Times';
 
 type props = {
   actData: {
@@ -21,14 +23,15 @@ export default function Timetable({ actData }: props) {
       <Text style={styles.text}>Timetable:</Text>
       <Text style={styles.text}>Filters:</Text>
       <DayPicker daySelected={daySelected} setDaySelected={setDaySelected}></DayPicker>
+      <ScrollView nestedScrollEnabled style={styles.verticalScrollView}>
+        {/* <Times></Times> */}
+        <Stages></Stages>
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerStyle: {
-    backgroundColor: '#81E1B8',
-  },
   container: {
     flex: 1,
     backgroundColor: 'hsl(247, 56%, 18%)',
@@ -36,5 +39,10 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     textAlign: 'center',
+  },
+  verticalScrollView: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#eb7db1',
   },
 });
