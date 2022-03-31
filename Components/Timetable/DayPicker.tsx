@@ -1,5 +1,5 @@
-import React, { useCallback, useRef } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, Pressable } from 'react-native';
+import React from 'react';
+import { SafeAreaView, StyleSheet, Text, Pressable } from 'react-native';
 
 type Props = {
   daySelected: string;
