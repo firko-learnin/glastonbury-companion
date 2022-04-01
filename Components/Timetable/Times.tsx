@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
 const times = [
+  '',
   '00:00',
   '01:00',
   '02:00',
@@ -33,9 +34,9 @@ export default function Times() {
   return (
     <View style={styles.timeRow}>
       {times.map((time, index) => (
-        <Text key={`${time}${index}`} style={styles.text}>
-          {time}
-        </Text>
+        <View key={`${time}${index}`} style={styles.timeContainer}>
+          <Text style={styles.text}>{time}</Text>
+        </View>
       ))}
     </View>
   );
@@ -47,15 +48,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#eb7db1',
     height: 40,
     alignItems: 'center',
+    marginLeft: 0,
+  },
+  timeContainer: {
+    width: 100,
   },
   text: {
     color: 'white',
-    width: 60,
     fontSize: 14,
     textAlign: 'center',
-  },
-  event: {
-    width: 100,
-    flexDirection: 'column',
   },
 });

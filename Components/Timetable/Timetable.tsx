@@ -23,9 +23,22 @@ export default function Timetable({ actData }: props) {
       <Text style={styles.text}>Timetable:</Text>
       <Text style={styles.text}>Filters:</Text>
       <DayPicker daySelected={daySelected} setDaySelected={setDaySelected}></DayPicker>
-      <ScrollView nestedScrollEnabled style={styles.verticalScrollView}>
-        {/* <Times></Times> */}
-        <Stages></Stages>
+      <ScrollView
+        nestedScrollEnabled
+        horizontal
+        style={styles.ScrollViewHorizontal}
+        stickyHeaderIndices={[0]}
+      >
+        <ScrollView nestedScrollEnabled style={styles.verticalScrollView} stickyHeaderIndices={[0]}>
+          <Times></Times>
+          <ScrollView
+            nestedScrollEnabled
+            style={styles.verticalScrollView}
+            stickyHeaderIndices={[0]}
+          >
+            <Stages></Stages>
+          </ScrollView>
+        </ScrollView>
       </ScrollView>
     </SafeAreaView>
   );
@@ -44,5 +57,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#eb7db1',
+  },
+  ScrollViewHorizontal: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'green',
   },
 });

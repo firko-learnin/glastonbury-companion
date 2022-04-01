@@ -1,78 +1,35 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
-import Times from './Times';
+import { View, StyleSheet, Text } from 'react-native';
+import EventGrid from './EventGrid';
 
 const stages = ['Pyramid Stage', 'Other Stage', 'John Peel'];
 
 export default function Stages() {
   return (
-    <View style={styles.container}>
-      <View style={styles.stageColumn}>
-        {stages.map((stage, index) => (
-          <View style={styles.textContainer}>
-            <Text key={`${stage}${index}`} style={styles.text}>
-              {stage}
-            </Text>
+    <View style={styles.gridContainer}>
+      {stages.map((stage, index) => (
+        <View key={`${stage}${index}`} style={styles.stageRow}>
+          <View style={styles.stageNameContainer}>
+            <Text style={styles.text}>{stage}</Text>
           </View>
-        ))}
-        {stages.map((stage, index) => (
-          <View style={styles.textContainer}>
-            <Text key={`${stage}${index}`} style={styles.text}>
-              {stage}
-            </Text>
-          </View>
-        ))}
-        {stages.map((stage, index) => (
-          <View style={styles.textContainer}>
-            <Text key={`${stage}${index}`} style={styles.text}>
-              {stage}
-            </Text>
-          </View>
-        ))}
-        {stages.map((stage, index) => (
-          <View style={styles.textContainer}>
-            <Text key={`${stage}${index}`} style={styles.text}>
-              {stage}
-            </Text>
-          </View>
-        ))}
-        {stages.map((stage, index) => (
-          <View style={styles.textContainer}>
-            <Text key={`${stage}${index}`} style={styles.text}>
-              {stage}
-            </Text>
-          </View>
-        ))}
-        {stages.map((stage, index) => (
-          <View style={styles.textContainer}>
-            <Text key={`${stage}${index}`} style={styles.text}>
-              {stage}
-            </Text>
-          </View>
-        ))}
-      </View>
-      <ScrollView
-        nestedScrollEnabled
-        horizontal
-        style={styles.ScrollViewHorizontal}
-        stickyHeaderIndices={[0]}
-      >
-        <Times></Times>
-      </ScrollView>
+          <EventGrid stage={stage}></EventGrid>
+        </View>
+      ))}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  gridContainer: {
     flex: 1,
-    flexDirection: 'row',
+    backgroundColor: 'white',
   },
-  stageColumn: {
-    marginTop: 40,
-    flexDirection: 'column',
+  stageRow: {
+    marginTop: 0,
+    flexDirection: 'row',
     backgroundColor: '#eb7db1',
-    width: 80,
+    width: 100,
+    alignContent: 'center',
   },
   text: {
     color: 'white',
@@ -80,13 +37,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   },
-  textContainer: {
-    width: 60,
-    height: 60,
-  },
-  ScrollViewHorizontal: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: 'green',
+  stageNameContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
+    width: 100,
   },
 });
