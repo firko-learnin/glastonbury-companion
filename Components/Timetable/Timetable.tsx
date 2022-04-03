@@ -3,7 +3,9 @@ import { SafeAreaView, StyleSheet, Text, ScrollView } from 'react-native';
 import DayPicker from './DayPicker';
 import Stages from './Stages';
 import Times from './Times';
+import dayjs from 'dayjs';
 
+// actData prop contains all acts for all of the stages
 type props = {
   actData: {
     end?: string;
@@ -15,9 +17,14 @@ type props = {
   }[];
 };
 
-export default function Timetable({ actData }: props) {
-  const [daySelected, setDaySelected] = useState('Wednesday');
-  console.log(actData);
+function filterByDay(actData: props['actData'], day: String) {
+  // Convert the start date into a day of the week and return filtered data
+  return actData.filter((act) => dayjs(act.start).format('dddd') === day);
+}
+
+export default function Timetable() {
+  const [daySelected, setDaySelected] = useState('Friday');
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Timetable:</Text>
@@ -36,7 +43,7 @@ export default function Timetable({ actData }: props) {
             style={styles.verticalScrollView}
             stickyHeaderIndices={[0]}
           >
-            <Stages></Stages>
+            <Stages daySelected={daySelected}></Stages>
           </ScrollView>
         </ScrollView>
       </ScrollView>

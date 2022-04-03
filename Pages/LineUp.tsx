@@ -13,15 +13,7 @@ export default function LineUp() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Pyramid Stage</Text>
-      {/* <ScrollView contentContainerStyle={styles.scrollView}>
-        {data.map((item, index) => (
-          <Text key={index} style={styles.text}>
-            {'\u2B24' + ' '}
-            {item.name} - {item.start}
-          </Text>
-        ))}
-      </ScrollView> */}
-      <Timetable actData={actData}></Timetable>
+      <Timetable></Timetable>
     </SafeAreaView>
   );
 }
