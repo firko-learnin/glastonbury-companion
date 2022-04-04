@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#eb7db1',
     height: 40,
     alignItems: 'center',
-    marginLeft: 0,
+    marginLeft: -25,
   },
   timeContainer: {
     width: 100,

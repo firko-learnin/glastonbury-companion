@@ -47,14 +47,14 @@ export default function Stages({ daySelected }: Props) {
 const styles = StyleSheet.create({
   gridContainer: {
     flex: 1,
-    width: 2600,
+    width: 2500,
     backgroundColor: 'white',
   },
   stageRow: {
     marginTop: 0,
     flexDirection: 'row',
     backgroundColor: '#eb7db1',
-    width: 2600,
+    width: 2500,
     alignContent: 'center',
   },
   text: {
