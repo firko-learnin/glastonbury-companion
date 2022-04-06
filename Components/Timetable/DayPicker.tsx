@@ -8,7 +8,6 @@ type Props = {
 
 export default function DayPicker({ daySelected, setDaySelected }: Props) {
   function handlePress(day: string) {
-    console.log(day);
     setDaySelected(day);
   }
   return (
@@ -17,35 +16,35 @@ export default function DayPicker({ daySelected, setDaySelected }: Props) {
         style={daySelected === 'Wednesday' ? styles.daySelected : styles.Pressable}
         onPress={() => handlePress('Wednesday')}
       >
-        <Text style={styles.text}>Wednesday</Text>
+        <Text style={styles.text}>Wed</Text>
       </Pressable>
 
       <Pressable
         style={daySelected === 'Thursday' ? styles.daySelected : styles.Pressable}
         onPress={() => handlePress('Thursday')}
       >
-        <Text style={styles.text}>Thursday</Text>
+        <Text style={styles.text}>Thu</Text>
       </Pressable>
 
       <Pressable
         style={daySelected === 'Friday' ? styles.daySelected : styles.Pressable}
         onPress={() => handlePress('Friday')}
       >
-        <Text style={styles.text}>Friday</Text>
+        <Text style={styles.text}>Fri</Text>
       </Pressable>
 
       <Pressable
         style={daySelected === 'Saturday' ? styles.daySelected : styles.Pressable}
         onPress={() => handlePress('Saturday')}
       >
-        <Text style={styles.text}>Saturday</Text>
+        <Text style={styles.text}>Sat</Text>
       </Pressable>
 
       <Pressable
         style={daySelected === 'Sunday' ? styles.daySelected : styles.Pressable}
         onPress={() => handlePress('Sunday')}
       >
-        <Text style={styles.text}>Sunday</Text>
+        <Text style={styles.text}>Sun</Text>
       </Pressable>
     </SafeAreaView>
   );
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 15,
+    fontSize: 16,
   },
   dayPicker: {
     flexDirection: 'row',

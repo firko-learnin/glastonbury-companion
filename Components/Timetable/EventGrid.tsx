@@ -16,6 +16,23 @@ type Props = {
   daySelected: string;
 };
 
+type Dates = {
+  Wednesday: dayjs.Dayjs;
+  Thursday: dayjs.Dayjs;
+  Friday: string;
+  Saturday: string;
+  Sunday: string;
+};
+
+//2019 festival dates
+const dates = {
+  Wednesday: '2019-06-26 00:00',
+  Thursday: '2019-06-27 00:00',
+  Friday: '2019-06-28 00:00',
+  Saturday: '2019-06-29 00:00',
+  Sunday: '2019-06-30 00:00',
+};
+
 function filterByDay(actData: Props['stageData'], day: String) {
   // Convert the start date into a day of the week and return filtered data
   return actData.filter((act) => dayjs(act.start).format('dddd') === day);
@@ -31,9 +48,9 @@ function generateSlots(
     url?: string | undefined;
     timeBefore?: number;
     runTime?: number;
-  }[]
+  }[],
+  day: string
 ) {
-  console.log(dateFilteredActs);
   //Declare an array to contain the times defined by flex size
   const slots: {
     end?: string | undefined;
@@ -45,6 +62,12 @@ function generateSlots(
     timeBefore?: number | undefined;
     runTime?: number;
   }[] = [];
+  //Declare minimum start time for acts spanning midnight the previous day
+  const minStart = dayjs(dates[day as keyof Dates])
+    .set('hour', 0)
+    .set('minute', 0);
+  //Declare maximum end time for acts spanning midnight the following day
+  const maxEnd = dayjs(minStart, 'YYYY-MM-DD').add(1, 'day');
   dateFilteredActs.forEach((act, index) => {
     //Calculate the time before the event (assume items are in time order)
     let date1;
@@ -60,7 +83,7 @@ function generateSlots(
     //Calculate runtime
     const start = dayjs(act.start);
     const end = dayjs(act.end);
-    const runTime = end.diff(start) / 60000;
+    const runTime = Math.min(end.diff(start), maxEnd.diff(start)) / 60000;
     act.runTime = runTime;
     slots.push(act);
     //Account for time after final act
@@ -71,11 +94,11 @@ function generateSlots(
       slots.push({ runTime: finalTime, name: 'Blank space' });
     }
   });
-  let total = 0;
-  for (let i = 0; i < slots.length; i++) {
-    total += slots[i].runTime!;
-    console.log(total);
-  }
+  // let total = 0;
+  // for (let i = 0; i < slots.length; i++) {
+  //   total += slots[i].runTime!;
+  //   // console.log(total);
+  // }
   return slots;
 }
 
@@ -83,8 +106,7 @@ export default function EventGrid({ stage, stageData, daySelected }: Props) {
   // Filter down the data passed in for the stage to the user selected date
   const dateFilteredActs = filterByDay(stageData, daySelected);
 
-  const slots = generateSlots(dateFilteredActs);
-  console.log(slots);
+  const slots = generateSlots(dateFilteredActs, daySelected);
 
   //Generate an array of 25 hours to map through to create a grid
   const getHours = (): number[] => {
@@ -99,47 +121,46 @@ export default function EventGrid({ stage, stageData, daySelected }: Props) {
   //Return a "grid" with a width of 2400, total width 2500 including the stage names, use this to calculate event "slots"
   return (
     <>
-      {/* {hours.map((time, index) => (
-        <View key={`${stage}${time}${index}`} style={styles.container}>
-          <Text style={styles.text}>
-            {stage} - {time}
-          </Text>
-        </View>
-      ))} */}
-      {slots.map((slot, index) => (
-        <View
-          key={`${stage}${index}`}
-          style={{
-            flex: slot.runTime,
-            height: '100%',
-            backgroundColor: slot.name === 'Blank space' ? 'white' : 'blue',
-            borderColor: 'red',
-            borderWidth: 1,
-          }}
-        >
-          {slot.name === 'Blank space' ? null : (
-            <Text style={styles.text}>
-              {slot.name}
-              {'\n'} {'\n'} {'\n'}
-              {dayjs(slot.start).format('HH:mm')} - {dayjs(slot.end).format('HH:mm')}
-            </Text>
-          )}
-        </View>
-      ))}
+      {slots.map((slot, index) =>
+        slot.runTime! > 0 ? (
+          <View
+            key={`${stage}${index}`}
+            style={{
+              flex: slot.runTime,
+              height: 100,
+              alignContent: 'center',
+              justifyContent: 'center',
+              backgroundColor: slot.name === 'Blank space' ? 'white' : 'rgb(26, 20, 72)',
+              borderColor: 'white',
+              borderWidth: 0.5,
+              overflow: 'hidden',
+            }}
+          >
+            {slot.name === 'Blank space' ? (
+              <Text style={styles.emptySlotText}>{stage}</Text>
+            ) : (
+              <Text style={styles.text}>
+                {slot.name}
+                {'\n'} {'\n'} {'\n'}
+                {dayjs(slot.start).format('HH:mm')} - {dayjs(slot.end).format('HH:mm')}
+              </Text>
+            )}
+          </View>
+        ) : null
+      )}
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, //Flex 1 will change depending on act duration
-    height: '100%',
-    backgroundColor: 'blue',
-    borderColor: 'red',
-    borderWidth: 1,
-  },
   text: {
     color: 'white',
     textAlign: 'center',
+    fontSize: 14,
+  },
+  emptySlotText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 12,
   },
 });

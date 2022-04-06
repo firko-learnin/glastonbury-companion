@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SafeAreaView, StyleSheet, Text, ScrollView } from 'react-native';
 import DayPicker from './DayPicker';
 import Stages from './Stages';
@@ -24,6 +24,13 @@ function filterByDay(actData: props['actData'], day: String) {
 
 export default function Timetable() {
   const [daySelected, setDaySelected] = useState('Friday');
+  const [yScroll, setYScroll] = useState(0);
+  const scrollRef = useRef<ScrollView>(null);
+
+  //Reset the scroll position to left 0 when day changes
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ y: 0, animated: true });
+  }, [daySelected]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -31,6 +38,7 @@ export default function Timetable() {
       <Text style={styles.text}>Filters:</Text>
       <DayPicker daySelected={daySelected} setDaySelected={setDaySelected}></DayPicker>
       <ScrollView
+        ref={scrollRef}
         nestedScrollEnabled
         horizontal
         style={styles.ScrollViewHorizontal}
@@ -68,6 +76,6 @@ const styles = StyleSheet.create({
   ScrollViewHorizontal: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'green',
+    backgroundColor: 'hsl(247, 56%, 18%)',
   },
 });

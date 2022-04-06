@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import EventGrid from './EventGrid';
 import schedule from '../../Data/schedule2019.json'; // Will eventually be a fetch request
 
-const stages = ['Pyramid Stage', 'Other Stage', 'John Peel Stage'];
+const stages = schedule.locations.map((stage) => stage.name);
 type Props = {
   daySelected: string;
 };
@@ -47,26 +47,30 @@ export default function Stages({ daySelected }: Props) {
 const styles = StyleSheet.create({
   gridContainer: {
     flex: 1,
-    width: 2500,
+    width: 5000,
     backgroundColor: 'white',
+    marginBottom: 100,
   },
   stageRow: {
     marginTop: 0,
     flexDirection: 'row',
-    backgroundColor: '#eb7db1',
-    width: 2500,
+    backgroundColor: 'rgb(26, 20, 72)',
+    width: 5000,
     alignContent: 'center',
+    borderBottomWidth: 0.5,
+    borderColor: 'black',
   },
   text: {
     color: 'white',
-    width: 60,
-    fontSize: 14,
+    width: 200,
+    fontSize: 16,
     textAlign: 'center',
   },
   stageNameContainer: {
+    backgroundColor: '#eb7db1',
     justifyContent: 'center',
     alignItems: 'center',
     height: 100,
-    width: 100,
+    width: 200,
   },
 });

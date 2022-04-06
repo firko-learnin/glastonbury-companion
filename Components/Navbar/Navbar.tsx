@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    borderTopColor: 'white',
+    borderTopWidth: 1,
   },
   nav1: {
     height: '100%',

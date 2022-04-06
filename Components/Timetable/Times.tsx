@@ -49,13 +49,15 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     marginLeft: -25,
+    borderBottomWidth: 1,
+    borderColor: 'rgb(0, 172, 240)',
   },
   timeContainer: {
-    width: 100,
+    width: 200,
   },
   text: {
     color: 'white',
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'left',
   },
 });
