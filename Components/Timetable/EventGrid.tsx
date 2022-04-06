@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   emptySlotText: {
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
     fontSize: 12,
   },
