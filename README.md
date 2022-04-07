@@ -1,3 +1,3 @@
 ## Purpose
 
-A Glastonbury Festival companion app with functionality similar to https://clashfinder.com/ built using React Native/[Expo](https://github.com/expo/expo)
+A WIP React Native app for the Glastonbury Festival, with functionality similar to the popular https://clashfinder.com/
