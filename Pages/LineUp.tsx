@@ -2,17 +2,10 @@ import { StyleSheet, Text, SafeAreaView, ScrollView, StatusBar } from 'react-nat
 import schedule from '../Data/schedule2019.json';
 import Timetable from '../Components/Timetable/Timetable';
 
-function extractPyramid() {
-  const index = schedule.locations.findIndex((location) => location.name === 'Pyramid Stage');
-  const actData = schedule.locations[index].events;
-  return actData;
-}
-
 export default function LineUp() {
-  const actData = extractPyramid();
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Pyramid Stage</Text>
+      <Text style={styles.title}>Schedule</Text>
       <Timetable></Timetable>
     </SafeAreaView>
   );
