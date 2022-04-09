@@ -24,7 +24,6 @@ function filterByDay(actData: props['actData'], day: String) {
 
 export default function Timetable() {
   const [daySelected, setDaySelected] = useState('Friday');
-  const [yScroll, setYScroll] = useState(0);
   const scrollRef = useRef<ScrollView>(null);
 
   //Reset the scroll position to left 0 when day changes
